@@ -18,8 +18,8 @@
         value: (s)=>s.slice(1,-1),
     },
     string: {
-      match: /"(?:[^\n\\"]|\\['"\\ntbfr])*"/,
-      value: (s) => JSON.parse(s),
+    match: /"(?:[^\\"]|\\['"\\ntbfr]|\\[\s\S])*"/, // Notice \\[\s\S] which matches any character including newlines
+    value: (s) => JSON.parse(s),
     },
     number: {
       // @ts-ignore Ignore the error for now until finding a better regex

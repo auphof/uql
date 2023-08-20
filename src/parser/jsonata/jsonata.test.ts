@@ -40,6 +40,24 @@ describe("parser", () => {
         },
       ]);
     });
+    it("should filter data correctly with multiple elements using multiline strings", async () => {
+      expect(await uql(
+        `scope "Countries" 
+          | jsonata "*[Country in \
+                [ \
+                  'India', \
+                  'United Kingdom' \
+                ]][] \
+              "
+        `, { data })).toStrictEqual([
+        {
+          Country: "India",
+        },
+        {
+          Country: "United Kingdom",
+        },
+      ]);
+    });    
   });
 });
 
