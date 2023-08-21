@@ -44,8 +44,8 @@ declare var ws: any;
         value: (s)=>s.slice(1,-1),
     },
     string: {
-    match: /"(?:[^\\"]|\\['"\\ntbfr]|\\[\s\S])*"/, // Notice \\[\s\S] which matches any character including newlines
-    value: (s) => JSON.parse(s),
+    match: /"(?:[^"\\]*(?:\\.[^"\\]*)*)"/, 
+    value: (s) => JSON.parse(s.replace(/[\r\n]+/g, '')),
     },
     number: {
       // @ts-ignore Ignore the error for now until finding a better regex
